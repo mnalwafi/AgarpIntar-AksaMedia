@@ -1,31 +1,43 @@
 <div
   class="w-screen h-screen bg-[#f6f6f6] bg-[radial-gradient(rgba(0,0,0,0.05)_2px,transparent_0)] bg-[length:30px_30px] bg-[position:-5px_-5px] dark:bg-[#1f1f1f] dark:bg-[radial-gradient(rgba(255,255,255,0.1)_2px,transparent_0)] overflow-hidden"
+  role="main"
+  aria-label="Login page"
 >
-<!-- Toggle Theme -->
- <app-toggle-theme class="fixed top-8 right-8"></app-toggle-theme>
+
+  <app-toggle-theme
+    class="fixed top-8 right-8"
+    aria-label="Toggle light and dark mode"
+  ></app-toggle-theme>
 
   <h1
     class="text-[#28272C] dark:text-[#e5e5e5] text-xs flex items-end w-64 flex-col fixed left-1/2 -translate-x-1/2 top-12 select-none"
+    role="banner"
+    aria-label="AgarpIntar Logo"
   >
     <span
       class="font-syne text-4xl font-bold leading-normal w-full text-start -mb-1"
-      >AgarpIntar</span
-    >By Muhammad Nashih Al Wafi
+    >
+      AgarpIntar
+    </span>
+    <span>By Muhammad Nashih Al Wafi</span>
   </h1>
 
   <form
     id="login-form"
     class="scale-[.85] sm:scale-100 flex flex-col w-fit fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-fit py-12 px-8 items-start gap-6 rounded-3xl border border-[#cccccc] bg-[#f1f1f1] dark:border-[#3a3a3a] dark:bg-[#2c2c2c] select-none"
     (submit)="signIn($event)"
+    aria-labelledby="greeting"
   >
     <img
       src="image/sparkle.png"
       alt="sparkle"
+      aria-hidden="true"
       class="absolute -bottom-[17.25rem] -left-[11.5rem] scale-50"
     />
     <img
       src="image/sparkle.png"
       alt="sparkle"
+      aria-hidden="true"
       class="absolute -top-[18rem] -right-[11.5rem] scale-50 rotate-[305deg]"
     />
     <h2
@@ -54,6 +66,7 @@
           placeholder="Masukkan username"
           class="flex h-11 py-3 px-4 self-stretch rounded-xl border border-[#d4d4d4] bg-[#ffffff] shadow-[0_4px_10px_0_rgba(0,0,0,0.05)] dark:border-[#555555] dark:bg-[#3a3a3a] dark:shadow-[0_4px_10px_0_rgba(0,0,0,0.3)]"
           formControlName="username"
+          aria-required="true"
         />
       </div>
 
@@ -70,6 +83,7 @@
           placeholder="********"
           class="flex h-11 py-3 px-4 self-stretch rounded-xl border border-[#d4d4d4] bg-[#ffffff] shadow-[0_4px_10px_0_rgba(0,0,0,0.05)] dark:border-[#555555] dark:bg-[#3a3a3a] dark:shadow-[0_4px_10px_0_rgba(0,0,0,0.3)]"
           formControlName="password"
+          aria-required="true"
           #passwordField
         />
         <button
@@ -80,6 +94,7 @@
               ? (passwordField.type = 'text')
               : (passwordField.type = 'password')
           "
+          aria-label="Toggle password visibility"
         >
           {{
             passwordField.type === "password" ? "visibility" : "visibility_off"
@@ -92,6 +107,7 @@
       type="submit"
       id="submit-button"
       class="group flex relative w-full py-3 px-4 justify-center items-center rounded-xl bg-[#c4e9ec] dark:bg-[#241D6B] dark:text-[#e5e5e5] transition duration-1000 ease-out overflow-hidden"
+      aria-label="Sign in"
     >
       <span
         id="masuk-yuk"
@@ -102,11 +118,13 @@
       <span
         id="salah-credential"
         class="z-10 translate-y-10 text-sm absolute group-hover:z-20 group-hover:text-[#e5e5e5] dark:group-hover:text-[#28272C] transition duration-1000 ease-out"
+        aria-hidden="true"
       >
         Oops! Password atau Username salah🤭
       </span>
       <div
         class="z-0 w-96 aspect-square rounded-full absolute bg-[#241D6B] dark:bg-[#c4e9ec] transform transition duration-1000 ease-out translate-y-60 group-hover:translate-y-0"
+        aria-hidden="true"
       ></div>
     </button>
   </form>
@@ -118,14 +136,19 @@
       '-translate-y-[32rem]': transitionState,
       'translate-y-[60rem]': !transitionState
     }"
+    aria-hidden="true"
   >
     <h3
       class="text-xs flex items-end w-64 flex-col text-[#e5e5e5] dark:text-[#28272C]"
+      role="banner"
+      aria-label="AgarpIntar Logo"
     >
       <span
         class="font-syne text-4xl font-bold leading-normal w-full text-start -mb-1"
-        >AgarpIntar</span
-      >By Muhammad Nashih Al Wafi
+      >
+        AgarpIntar
+      </span>
+      By Muhammad Nashih Al Wafi
     </h3>
   </div>
 </div>
