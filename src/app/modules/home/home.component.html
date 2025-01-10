@@ -1,0 +1,48 @@
+<div
+  class="w-screen px-4 h-screen overflow-hidden bg-[#f6f6f6] dark:bg-[#1f1f1f] text-[#28272C] dark:text-[#e5e5e5] select-none"
+>
+  <section
+    id="information-bar"
+    class="flex flex-col sm:flex-row my-8 w-full h-fit justify-between items-center"
+  >
+    <span
+      id="page-title"
+      class="font-syne text-2xl font-bold order-2 sm:order-1 leading-none"
+    >
+      Halaman Penilaian
+    </span>
+
+    <section
+      id="user-detail"
+      class="flex mb-4 sm:mb-0 gap-6 items-center justify-between sm:justify-end h-fit order-1 sm:order-2"
+    >
+      <app-toggle-theme></app-toggle-theme>
+      <div class="flex gap-6 items-center justify-right">
+        <p>Hello, {{ userData.username }}! 👋</p>
+        <figure>
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE6-KsNGUoKgyIAATW1CNPeVSHhZzS_FN0Zg&s"
+            alt="profile-picture"
+            class="size-12 rounded-full object-cover"
+          />
+        </figure>
+      </div>
+    </section>
+  </section>
+
+  <app-score-table></app-score-table>
+
+  <div
+    id="big-eclipse"
+    class="z-[999] hidden lg:flex fixed items-center justify-center left-1/2 -translate-x-1/2 size-[120vw] rounded-full bg-[#241D6B] dark:bg-[#c4e9ec] transform transition duration-1000"
+  >
+    <h3
+      class="text-xs flex items-end w-64 flex-col text-[#e5e5e5] dark:text-[#28272C]"
+    >
+      <span
+        class="font-syne text-4xl font-bold leading-normal w-full text-start -mb-1"
+        >AgarpIntar</span
+      >By Muhammad Nashih Al Wafi
+    </h3>
+  </div>
+</div>
