@@ -33,6 +33,7 @@
     "@angular/compiler-cli": "^18.2.0",
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
+    "@types/lodash": "^4.17.14",
     "@types/node": "^18.18.0",
     "@xpd/tailwind-3dtransforms": "^1.0.3",
     "jasmine-core": "~5.2.0",

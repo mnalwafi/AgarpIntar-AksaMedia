@@ -1,0 +1,93 @@
+<div
+  class="fixed w-screen h-screen bg-[#1f1f1f25] dark:bg-[#f6f6f625] flex items-center justify-center bottom-0 right-0"
+>
+  <section class="lg:w-fit w-11/12 h-fit bg-[#f6f6f6] dark:bg-[#1f1f1f] rounded-3xl p-6">
+    <section
+      id="dialog-head"
+      class="flex sm:flex-row w-full h-fit mb-6 justify-between items-center"
+    >
+      <span id="page-title" class="font-syne text-2xl font-bold leading-none">
+        {{ isEdit ? 'Edit' : 'Tambah' }} Data
+      </span>
+
+      <div class="flex gap-6 items-center justify-right material-icons cursor-pointer" (click)="closeDialog('close')">
+        close
+      </div>
+    </section>
+
+    <div id="score-table-add-form" class="flex items-center w-full gap-6 flex-col sm:flex-row lg:w-fit" [formGroup]="scoreForm">
+      <div id="name-add-form" class="sm:my-4 w-full lg:w-72 relative">
+        <input
+          type="text"
+          required
+          autocomplete="off"
+          formControlName="name"
+          class="p-3 outline-none border-2 border-solid border-[#1f1f1f] dark:border-[#f6f6f6] bg-transparent rounded-2xl w-full peer focus:border-[#6faacf] focus:dark:border-[#5A99D4]"
+        />
+        <label
+          for="name"
+          class="absolute left-0 top-1/2 -translate-y-1/2 p-3 ml-2 pointer-events-none transition-all duration-100 ease-out text-[#1f1f1f] dark:text-[#f6f6f6] peer-focus:translate-y-[-50%] peer-focus:top-0 peer-focus:scale-90 peer-focus:ml-[1.3em] peer-focus:p-[0.4em] peer-focus:bg-[#f6f6f6] peer-focus:dark:bg-[#1f1f1f] peer-focus:text-[#6faacf] peer-focus:dark:text-[#5A99D4] peer-valid:translate-y-[-50%] peer-valid:top-0 peer-valid:scale-90 peer-valid:ml-[1.3em] peer-valid:p-[0.4em] peer-valid:bg-[#f6f6f6] peer-valid:dark:bg-[#1f1f1f]"
+        >
+          Nama
+        </label>
+        <span class="text-red-500 translate-y-full ml-5 text-sm absolute bottom-0 right-0" *ngIf="scoreForm.get('name')?.hasError('required') && scoreForm.get('name')?.touched">Data ini belum terisi</span>
+      </div>
+      <div id="course-add-form" class="sm:my-4 w-full lg:w-48 relative">
+        <input
+          type="text"
+          required
+          autocomplete="off"
+          formControlName="course"
+          class="p-3 outline-none border-2 border-solid border-[#1f1f1f] dark:border-[#f6f6f6] bg-transparent rounded-2xl w-full peer focus:border-[#6faacf] focus:dark:border-[#5A99D4]"
+        />
+        <label
+          for="course"
+          class="absolute left-0 top-1/2 -translate-y-1/2 p-3 ml-2 pointer-events-none transition-all duration-100 ease-out text-[#1f1f1f] dark:text-[#f6f6f6] peer-focus:translate-y-[-50%] peer-focus:top-0 peer-focus:scale-90 peer-focus:ml-[1.3em] peer-focus:p-[0.4em] peer-focus:bg-[#f6f6f6] peer-focus:dark:bg-[#1f1f1f] peer-focus:text-[#6faacf] peer-focus:dark:text-[#5A99D4] peer-valid:translate-y-[-50%] peer-valid:top-0 peer-valid:scale-90 peer-valid:ml-[1.3em] peer-valid:p-[0.4em] peer-valid:bg-[#f6f6f6] peer-valid:dark:bg-[#1f1f1f]"
+        >
+          Pelajaran
+        </label>
+        <span class="text-red-500 translate-y-full ml-5 text-sm absolute bottom-0 right-0" *ngIf="scoreForm.get('course')?.hasError('required') && scoreForm.get('course')?.touched">Data ini belum terisi</span>
+      </div>
+      <div id="score-add-form" class="sm:my-4 w-full lg:w-48 relative">
+        <input
+          type="text"
+          (input)="restrictInput($event)"
+          required
+          autocomplete="off"
+          formControlName="score"
+          maxlength="3"
+          class="p-3 outline-none border-2 border-solid border-[#1f1f1f] dark:border-[#f6f6f6] bg-transparent rounded-2xl w-full peer focus:border-[#6faacf] focus:dark:border-[#5A99D4]"
+        />
+        <label
+          for="score"
+          class="absolute left-0 top-1/2 -translate-y-1/2 p-3 ml-2 pointer-events-none transition-all duration-100 ease-out text-[#1f1f1f] dark:text-[#f6f6f6] peer-focus:translate-y-[-50%] peer-focus:top-0 peer-focus:scale-90 peer-focus:ml-[1.3em] peer-focus:p-[0.4em] peer-focus:bg-[#f6f6f6] peer-focus:dark:bg-[#1f1f1f] peer-focus:text-[#6faacf] peer-focus:dark:text-[#5A99D4] peer-valid:translate-y-[-50%] peer-valid:top-0 peer-valid:scale-90 peer-valid:ml-[1.3em] peer-valid:p-[0.4em] peer-valid:bg-[#f6f6f6] peer-valid:dark:bg-[#1f1f1f]"
+        >
+          Nilai
+        </label>
+        <span class="text-red-500 translate-y-full ml-5 text-sm absolute bottom-0 right-0" *ngIf="scoreForm.get('score')?.hasError('required') && scoreForm.get('score')?.touched">Data ini belum terisi</span>
+      </div>
+      <div id="class-add-form" class="sm:my-4 w-full lg:w-48 relative">
+        <input
+          type="text"
+          required
+          autocomplete="off"
+          formControlName="class"
+          maxlength="3"
+          class="p-3 outline-none border-2 border-solid border-[#1f1f1f] dark:border-[#f6f6f6] bg-transparent rounded-2xl w-full peer focus:border-[#6faacf] focus:dark:border-[#5A99D4]"
+        />
+        <label
+          for="class"
+          class="absolute left-0 top-1/2 -translate-y-1/2 p-3 ml-2 pointer-events-none transition-all duration-100 ease-out text-[#1f1f1f] dark:text-[#f6f6f6] peer-focus:translate-y-[-50%] peer-focus:top-0 peer-focus:scale-90 peer-focus:ml-[1.3em] peer-focus:p-[0.4em] peer-focus:bg-[#f6f6f6] peer-focus:dark:bg-[#1f1f1f] peer-focus:text-[#6faacf] peer-focus:dark:text-[#5A99D4] peer-valid:translate-y-[-50%] peer-valid:top-0 peer-valid:scale-90 peer-valid:ml-[1.3em] peer-valid:p-[0.4em] peer-valid:bg-[#f6f6f6] peer-valid:dark:bg-[#1f1f1f]"
+        >
+          Kelas
+        </label>
+        <span class="text-red-500 translate-y-full ml-5 text-sm absolute bottom-0 right-0" *ngIf="scoreForm.get('class')?.hasError('required') && scoreForm.get('class')?.touched">Data ini belum terisi</span>
+      </div>
+    </div>
+    <div id="form-add-new-data" class="w-full mt-6 flex justify-end gap-4 text-[#28272C] dark:bg-[#241D6B] dark:text-[#f6f6f6]">
+      <button class="px-6 py-2 rounded-2xl bg-[#ECC4C5]" (click)="closeDialog('close')">Batal</button>
+      <button *ngIf="!isEdit" class="px-6 py-2 rounded-2xl bg-[#C4E9EC]" (click)="addScore()">Tambah</button>
+      <button *ngIf="isEdit" class="px-6 py-2 rounded-2xl bg-[#ECEBC4]" (click)="editScore()">Edit</button>
+    </div>
+  </section>
+</div>

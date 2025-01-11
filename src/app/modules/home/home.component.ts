@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ThemeService } from '../../services/theme-service/theme.service';
 import { SubSink } from 'subsink';
 import { NgClass } from '@angular/common';
@@ -8,10 +8,10 @@ import { ScoreTableComponent } from "../../component/score-table/score-table.com
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgClass, ToggleThemeComponent, ScoreTableComponent],
+  imports: [ToggleThemeComponent, ScoreTableComponent],
   templateUrl: './home.component.html',
 })
-export class HomeComponent implements AfterViewInit, OnInit {
+export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
   private _subs = new SubSink();
   userData: {username: string, password: string} = { username: '', password: '' };
 
@@ -48,5 +48,9 @@ export class HomeComponent implements AfterViewInit, OnInit {
         }
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    this._subs?.unsubscribe();
   }
 }
