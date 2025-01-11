@@ -6,6 +6,12 @@ import { AuthGuard } from './guards/auth.guard';
 export const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
+    redirectTo: 'home',
+  },
+
+  {
+    path: '',
     canActivate: [NoAuthGuard],
     canActivateChild: [NoAuthGuard],
     children: [
@@ -33,7 +39,8 @@ export const routes: Routes = [
     children: [
       {
         path: 'change-profile',
-        loadChildren: () => import('./modules/profile-form/profile-form.routes'),
+        loadChildren: () =>
+          import('./modules/profile-form/profile-form.routes'),
       },
     ],
   },
