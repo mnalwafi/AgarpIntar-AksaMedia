@@ -1,0 +1,400 @@
+<section
+  id="table"
+  class="flex flex-col items-start gap-4 self-stretch text-[#28272C] dark:text-[#e5e5e5] w-full overflow-hidden"
+>
+  <div
+    id="table-content"
+    class="flex items-start self-stretch border-2 border-solid border-[#28272C40] rounded-[2rem] w-full relative overflow-hidden"
+  >
+    <!-- *************** Fixed Column Start Here *************** -->
+    <div
+      id="table-fixed-column"
+      class="flex flex-col justify-center items-start w-fit"
+    >
+      <!-- *************** Fixed Column Header Start Here *************** -->
+      <div
+        id="table-fixed-column-header"
+        class="flex py-4 px-6 justify-center items-center gap-12 bg-[#C4E9EC] dark:bg-[#241D6B] w-full rounded-tl-[2rem] min-h-14"
+      >
+        <ng-container
+          *ngFor="
+            let column of TableConfiguration?.fixedTableColumns;
+            let i = index
+          "
+        >
+          <div
+            [id]="'table-fixed-column-header-' + column?.title"
+            [ngClass]="{ 'rounded-tl-[2rem]': i === 0 }"
+          >
+            <div *ngIf="column?.isCheckbox; then checkbox; else text"></div>
+            <ng-template #checkbox>
+              <label class="container">
+                <input
+                  (change)="$event ? masterToggle() : null; selectionChange()"
+                  [checked]="isAllSelected()"
+                  type="checkbox"
+                  name="check-all"
+                  id="check-all"
+                />
+                <svg viewBox="0 0 64 64" height="1rem" width="1rem">
+                  <path
+                    d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                    pathLength="575.0541381835938"
+                    class="path"
+                  ></path>
+                </svg> </label
+            ></ng-template>
+            <ng-template #text>
+              <div
+                [id]="'table-fixed-column-header-' + column?.title + '-content'"
+                [class]="
+                  'group flex justify-between items-start ' +
+                  column?.columnClass
+                "
+              >
+                <!-- add group-hover:opacity-100 below (erased because i think there's no enough time to implement column customization)-->
+                <span
+                  class="material-icons opacity-0 duration-300 transition-all ease-out"
+                  >chevron_left</span
+                >
+                <h3>{{ column?.title }}</h3>
+                <!-- add group-hover:opacity-100 below (erased because i think there's no enough time to implement column customization)-->
+                <span
+                  class="material-icons opacity-0 duration-300 transition-all ease-out"
+                  >chevron_right</span
+                >
+              </div>
+            </ng-template>
+          </div>
+        </ng-container>
+      </div>
+      <!-- *************** Fixed Column Header End Here *************** -->
+
+      <!-- *************** Fixed Column Filter Table Start Here *************** -->
+      <div
+        id="table-fixed-column-filter-table"
+        class="flex py-4 px-6 justify-center items-center gap-12 bg-[#C4E9EC] dark:bg-[#241D6B] w-full h-14"
+      >
+        <ng-container
+          *ngFor="
+            let column of TableConfiguration?.fixedTableColumns;
+            let i = index
+          "
+        >
+          <div
+            [id]="'table-fixed-column-filter-table-' + column?.title"
+            class="w-full"
+          >
+            <div *ngIf="column?.isHaveFilter; then noFilter; else filter"></div>
+            <ng-template #noFilter></ng-template>
+            <ng-template #filter></ng-template>
+          </div>
+        </ng-container>
+      </div>
+      <!-- *************** Fixed Column Filter Table End Here *************** -->
+
+      <!-- *************** Fixed Column Content Start Here *************** -->
+      <div
+        *ngIf="dataSource?.length; then showFixedContent; else noFixedContent"
+      ></div>
+      <ng-template #showFixedContent>
+        <ng-container
+          *ngFor="
+            let fixedTableData of TableConfiguration?.tableData;
+            let i = index
+          "
+        >
+          <div
+            [id]="'table-fixed-column-content' + i"
+            class="h-14 flex px-6 items-center justify-center gap-12 border-b-[1px] border-b-[#28272C25] dark:border-b-[#e5e5e525]"
+          >
+            <ng-container
+              *ngFor="
+                let column of TableConfiguration?.fixedTableColumns;
+                let j = index
+              "
+            >
+              <div
+                [id]="'table-fixed-column-content-' + i + '-' + column?.title"
+              >
+                <div *ngIf="column?.isCheckbox; then checkbox; else text"></div>
+                <ng-template #checkbox>
+                  <label class="container">
+                    <input
+                      (click)="$event.stopPropagation()"
+                      (change)="
+                        $event ? selection.toggle(fixedTableData) : null;
+                        selectionChange()
+                      "
+                      [checked]="selection.isSelected(fixedTableData)"
+                      type="checkbox"
+                      [name]="'check-one-' + i"
+                      [id]="'check-one-' + i"
+                    />
+                    <svg viewBox="0 0 64 64" height="1rem" width="1rem">
+                      <path
+                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                        pathLength="575.0541381835938"
+                        class="path"
+                      ></path>
+                    </svg> </label
+                ></ng-template>
+                <ng-template #text>
+                  <div
+                    [id]="
+                      'table-fixed-column-content-' +
+                      i +
+                      '-' +
+                      column?.title +
+                      '-value'
+                    "
+                    [class]="
+                      'flex justify-center items-start ' + column?.columnClass
+                    "
+                  >
+                    <h3>
+                      {{
+                        resolveColumnValue(column, fixedTableData)
+                      }}
+                    </h3>
+                  </div>
+                </ng-template>
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+      </ng-template>
+      <ng-template #noFixedContent>
+        <div class="h-14 w-full"></div>
+      </ng-template>
+      <!-- *************** Fixed Column Content End Here *************** -->
+    </div>
+    <!-- *************** Fixed Column End Here *************** -->
+
+    <!-- *************** Scroll Column Start Here *************** -->
+    <div
+      id="table-scroll-column"
+      class="flex flex-col items-start overflow-hidden w-full"
+    >
+      <div class="overflow-scroll w-full">
+        <!-- *************** Scroll Column Header Start Here *************** -->
+        <div
+          id="table-scroll-column-header"
+          class="flex py-4 px-6 justify-center items-center gap-12 bg-[#C4E9EC] dark:bg-[#241D6B] w-fit min-h-14"
+        >
+          <ng-container
+            *ngFor="
+              let column of TableConfiguration?.scrollTableColumns;
+              let i = index
+            "
+          >
+            <div [id]="'table-scroll-column-header-' + column?.title">
+              <div *ngIf="column?.isCheckbox; then checkbox; else text"></div>
+              <ng-template #checkbox>
+                <label class="container">
+                  <input
+                    (change)="$event ? masterToggle() : null; selectionChange()"
+                    [checked]="isAllSelected()"
+                    type="checkbox"
+                    name="check-all"
+                    id="check-all"
+                  />
+                  <svg viewBox="0 0 64 64" height="1rem" width="1rem">
+                    <path
+                      d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                      pathLength="575.0541381835938"
+                      class="path"
+                    ></path>
+                  </svg> </label
+              ></ng-template>
+              <ng-template #text>
+                <div
+                  [id]="
+                    'table-scroll-column-header-' + column?.title + '-content'
+                  "
+                  [class]="
+                    'group flex justify-between items-start ' +
+                    column?.columnClass
+                  "
+                >
+                  <!-- add group-hover:opacity-100 below (erased because i think there's no enough time to implement column customization)-->
+                  <span
+                    class="material-icons opacity-0 duration-300 transition-all ease-out"
+                    >chevron_left</span
+                  >
+                  <h3>{{ column?.title }}</h3>
+                  <!-- add group-hover:opacity-100 below (erased because i think there's no enough time to implement column customization)-->
+                  <span
+                    class="material-icons opacity-0 duration-300 transition-all ease-out"
+                    >chevron_right</span
+                  >
+                </div>
+              </ng-template>
+            </div>
+          </ng-container>
+        </div>
+        <!-- *************** Scroll Column Header End Here *************** -->
+
+        <!-- *************** Scroll Column Table Filter Start Here *************** -->
+        <div
+          id="table-scroll-column-filter-table"
+          class="flex py-4 px-6 justify-center items-center gap-12 bg-[#C4E9EC] dark:bg-[#241D6B] w-fit h-14"
+        >
+          <ng-container
+            *ngFor="
+              let column of TableConfiguration?.scrollTableColumns;
+              let i = index
+            "
+          >
+            <div
+              [id]="'table-scroll-column-filter-table-' + column?.title"
+              [class]="column?.columnClass"
+            >
+              <div
+                *ngIf="column?.isHaveFilter; then noFilter; else filter"
+              ></div>
+              <ng-template #noFilter></ng-template>
+              <ng-template #filter></ng-template>
+            </div>
+          </ng-container>
+        </div>
+        <!-- *************** Scroll Column Table Filter End Here *************** -->
+
+        <!-- *************** Scroll Column Content Start Here *************** -->
+        <div
+          *ngIf="
+            dataSource?.length;
+            then showScrollContent;
+            else noScrollContent
+          "
+        ></div>
+        <ng-template #showScrollContent
+          ><ng-container
+            *ngFor="
+              let scrollTableData of TableConfiguration?.tableData;
+              let i = index
+            "
+          >
+            <div
+              [id]="'table-scroll-column-content' + i"
+              class="h-14 flex px-6 items-center justify-center gap-12 w-fit border-b-[1px] border-b-[#28272C25] dark:border-b-[#e5e5e525]"
+            >
+              <ng-container
+                *ngFor="
+                  let column of TableConfiguration?.scrollTableColumns;
+                  let j = index
+                "
+              >
+                <div
+                  [id]="
+                    'table-scroll-column-content-' + i + '-' + column?.title
+                  "
+                >
+                  <div
+                    *ngIf="column?.isCheckbox; then checkbox; else text"
+                  ></div>
+                  <ng-template #checkbox>
+                    <label class="container">
+                      <input
+                        (click)="$event.stopPropagation()"
+                        (change)="
+                          $event ? selection.toggle(scrollTableData) : null;
+                          selectionChange()
+                        "
+                        [checked]="selection.isSelected(scrollTableData)"
+                        type="checkbox"
+                        [name]="'check-one-' + i"
+                        [id]="'check-one-' + i"
+                      />
+                      <svg viewBox="0 0 64 64" height="1rem" width="1rem">
+                        <path
+                          d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                          pathLength="575.0541381835938"
+                          class="path"
+                        ></path>
+                      </svg> </label
+                  ></ng-template>
+                  <ng-template #text>
+                    <div
+                      [id]="
+                        'table-scroll-column-content-' +
+                        i +
+                        '-' +
+                        column?.title +
+                        '-value'
+                      "
+                      [class]="
+                        'flex justify-center items-start ' + column?.columnClass
+                      "
+                    >
+                      <h3>
+                        {{
+                          resolveColumnValue(column, scrollTableData)
+                        }}
+                      </h3>
+                    </div>
+                  </ng-template>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container></ng-template
+        >
+        <ng-template #noScrollContent>
+          <div class="h-14 w-full"></div>
+        </ng-template>
+        <!-- *************** Scroll Column Content End Here *************** -->
+      </div>
+    </div>
+    <!-- *************** Scroll Column End Here *************** -->
+
+    <!-- *************** Action Column Start Here *************** -->
+    <div
+      id="table-action-column"
+      class="flex flex-col items-start justify-center w-80"
+    >
+      <div
+        id="table-action-column-header"
+        class="flex px-6 items-center justify-start gap-12 w-full rounded-tr-[2rem] bg-[#C4E9EC] dark:bg-[#241D6B] py-4"
+      >
+        <span class="w-full text-center">Action</span>
+      </div>
+      <div
+        id="table-action-column-table-filter"
+        class="flex px-6 items-center justify-start gap-12 w-full h-14 bg-[#C4E9EC] dark:bg-[#241D6B]"
+      ></div>
+      <div
+        *ngIf="dataSource?.length; then showActionContent; else noActionContent"
+      ></div>
+      <ng-template #showActionContent>
+        <ng-container
+          *ngFor="let column of TableConfiguration?.tableData; let i = index"
+        >
+          <div
+            [id]="'table-action-column-content-' + i"
+            class="h-14 flex px-6 items-center justify-center gap-12 w-full border-b-[1px] border-b-[#28272C25] dark:border-b-[#e5e5e525]"
+          >
+            <button class="size-10 leading-none rounded-full bg-[#ECEBC4]" (click)="editRow(column)">
+              <span class="material-icons text-2xl">draw</span>
+            </button>
+            <button
+              class="size-10 leading-none rounded-full bg-[#ECC4C5]"
+              (click)="deleteRow(column?._id)"
+            >
+              <span class="material-icons text-2xl">delete</span>
+            </button>
+          </div>
+        </ng-container>
+      </ng-template>
+      <ng-template #noActionContent>
+        <div class="h-14 w-full"></div>
+      </ng-template>
+      <!-- *************** Action Column End Here *************** -->
+    </div>
+    <span
+      *ngIf="!dataSource?.length"
+      class="absolute bottom-0 h-14 left-1/2 -translate-x-1/2 flex items-center justify-center"
+      >Yah, belum ada nilai lagi😕</span
+    >
+  </div>
+  <div id="table-footer"></div>
+</section>

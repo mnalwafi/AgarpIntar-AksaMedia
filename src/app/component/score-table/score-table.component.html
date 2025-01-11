@@ -1,0 +1,108 @@
+<main id="score-table" class="flex w-full flex-col items-start gap-4">
+  <section
+    id="score-table-filter-and-button"
+    class="flex flex-col items-start gap-12 self-stretch"
+  >
+    <div
+      id="score-table-filter"
+      class="flex w-full justify-between items-center h-fit flex-col gap-2 lg:flex-row sm:gap-0"
+    >
+      <div id="score-table-super-filter" class="flex items-center w-full gap-6 flex-col sm:flex-row lg:w-fit" [formGroup]="superFilter">
+        <div id="name-filter" class="sm:my-4 w-full lg:w-72 relative">
+          <input
+            type="text"
+            required
+            autocomplete="off"
+            formControlName="name"
+            class="p-3 outline-none border-2 border-solid border-[#1f1f1f] dark:border-[#f6f6f6] bg-transparent rounded-2xl w-full peer focus:border-[#6faacf] focus:dark:border-[#5A99D4]"
+          />
+          <label
+            for="name"
+            class="absolute left-0 top-1/2 -translate-y-1/2 p-3 ml-2 pointer-events-none transition-all duration-100 ease-out text-[#1f1f1f] dark:text-[#f6f6f6] peer-focus:translate-y-[-50%] peer-focus:top-0 peer-focus:scale-90 peer-focus:ml-[1.3em] peer-focus:p-[0.4em] peer-focus:bg-[#f6f6f6] peer-focus:dark:bg-[#1f1f1f] peer-focus:text-[#6faacf] peer-focus:dark:text-[#5A99D4] peer-valid:translate-y-[-50%] peer-valid:top-0 peer-valid:scale-90 peer-valid:ml-[1.3em] peer-valid:p-[0.4em] peer-valid:bg-[#f6f6f6] peer-valid:dark:bg-[#1f1f1f]"
+          >
+            Nama
+          </label>
+        </div>
+        <div id="course-filter" class="sm:my-4 w-full lg:w-48 relative">
+          <input
+            type="text"
+            required
+            autocomplete="off"
+            formControlName="course"
+            class="p-3 outline-none border-2 border-solid border-[#1f1f1f] dark:border-[#f6f6f6] bg-transparent rounded-2xl w-full peer focus:border-[#6faacf] focus:dark:border-[#5A99D4]"
+          />
+          <label
+            for="course"
+            class="absolute left-0 top-1/2 -translate-y-1/2 p-3 ml-2 pointer-events-none transition-all duration-100 ease-out text-[#1f1f1f] dark:text-[#f6f6f6] peer-focus:translate-y-[-50%] peer-focus:top-0 peer-focus:scale-90 peer-focus:ml-[1.3em] peer-focus:p-[0.4em] peer-focus:bg-[#f6f6f6] peer-focus:dark:bg-[#1f1f1f] peer-focus:text-[#6faacf] peer-focus:dark:text-[#5A99D4] peer-valid:translate-y-[-50%] peer-valid:top-0 peer-valid:scale-90 peer-valid:ml-[1.3em] peer-valid:p-[0.4em] peer-valid:bg-[#f6f6f6] peer-valid:dark:bg-[#1f1f1f]"
+          >
+            Pelajaran
+          </label>
+        </div>
+        <div id="score-filter" class="sm:my-4 w-full lg:w-48 relative">
+          <input
+            type="text"
+            (input)="restrictInput($event)"
+            required
+            autocomplete="off"
+            formControlName="score"
+            maxlength="3"
+            class="p-3 outline-none border-2 border-solid border-[#1f1f1f] dark:border-[#f6f6f6] bg-transparent rounded-2xl w-full peer focus:border-[#6faacf] focus:dark:border-[#5A99D4]"
+          />
+          <label
+            for="score"
+            class="absolute left-0 top-1/2 -translate-y-1/2 p-3 ml-2 pointer-events-none transition-all duration-100 ease-out text-[#1f1f1f] dark:text-[#f6f6f6] peer-focus:translate-y-[-50%] peer-focus:top-0 peer-focus:scale-90 peer-focus:ml-[1.3em] peer-focus:p-[0.4em] peer-focus:bg-[#f6f6f6] peer-focus:dark:bg-[#1f1f1f] peer-focus:text-[#6faacf] peer-focus:dark:text-[#5A99D4] peer-valid:translate-y-[-50%] peer-valid:top-0 peer-valid:scale-90 peer-valid:ml-[1.3em] peer-valid:p-[0.4em] peer-valid:bg-[#f6f6f6] peer-valid:dark:bg-[#1f1f1f]"
+          >
+            Nilai
+          </label>
+        </div>
+      </div>
+      <div
+        id="score-table-submit-filter"
+        class="flex items-center gap-4 w-full justify-center lg:w-fit lg:justify-end"
+      >
+        <button
+          (click)="resetFilter()"
+          class="material-icons text-[2rem] p-2 items-center justify-center cursor-pointer rounded-3xl leading-none bg-[#D9D9D9] dark:bg-[#3a3a3a] dark:text-[#e5e5e5]"
+        >
+          refresh
+        </button>
+        <button
+          (click)="pagination.page = 1; fetchScoreData()"
+          class="material-icons text-[2rem] p-2 items-center justify-center cursor-pointer rounded-3xl leading-none bg-[#28272C] text-[#f6f6f6] dark:bg-[#f6f6f6] dark:text-[#28272C]"
+        >
+          search
+        </button>
+      </div>
+    </div>
+    <div
+      id="score-table-button"
+      class="w-full flex items-center justify-end gap-4 text-[#28272C] dark:bg-[#241D6B] dark:text-[#f6f6f6]"
+    >
+      <button
+        id="add-button"
+        class="flex py-2 px-4 justify-center items-center gap-2 rounded-2xl bg-[#C4E9EC]"
+        (click)="openAddScoreDialog('add')"
+      >
+        <span class="material-icons">add</span>
+        Tambah
+      </button>
+
+      <button
+        id="remove-button"
+        class="flex py-2 px-4 justify-center items-center gap-2 rounded-2xl bg-[#ECC4C5]"
+        (click)="deleteScore(currentSelection)"
+      >
+        <span class="material-icons">remove</span>
+        Hapus
+      </button>
+    </div>
+  </section>
+
+  <app-table id="score-table-content" [TableConfiguration]="tableConfig" (delete)="deleteScore($event)" (edit)="openAddScoreDialog('edit'); dataToBeEdited = $event" (changeSelection)="currentSelection = $event" class="w-full overflow-hidden"></app-table>
+
+  <section id="score-table-footer" class="w-full flex items-center justify-center mb-4">
+    <app-pagination [ngClass]="{'opacity-0': !tableConfig.tableData.length}" [paginationData]="paginationConfig" (change)="pagination.page = $event; fetchScoreData()"></app-pagination>
+  </section>
+</main>
+
+<app-add-score-dialog *ngIf="isOpenDialog" [dataToBeEdited]="dataToBeEdited" [isEdit]="isEdit" (close)="closeAddScoreDialog($event)"></app-add-score-dialog>
