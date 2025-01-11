@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { NoAuthGuard } from './guards/no-auth-guard.guard';
 import { AuthGuard } from './guards/auth.guard';
 

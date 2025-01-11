@@ -14,7 +14,7 @@
       <!-- *************** Fixed Column Header Start Here *************** -->
       <div
         id="table-fixed-column-header"
-        class="flex py-4 px-6 justify-center items-center gap-12 bg-[#C4E9EC] dark:bg-[#241D6B] w-full rounded-tl-[2rem] min-h-14"
+        class="flex py-4 px-6 justify-center items-center gap-12 bg-[#C4E9EC] dark:bg-[#93AFB1] w-full rounded-tl-[2rem] min-h-14"
       >
         <ng-container
           *ngFor="
@@ -73,7 +73,7 @@
       <!-- *************** Fixed Column Filter Table Start Here *************** -->
       <div
         id="table-fixed-column-filter-table"
-        class="flex py-4 px-6 justify-center items-center gap-12 bg-[#C4E9EC] dark:bg-[#241D6B] w-full h-14"
+        class="flex py-4 px-6 justify-center items-center gap-12 bg-[#C4E9EC] dark:bg-[#93AFB1] w-full h-14"
       >
         <ng-container
           *ngFor="
@@ -180,7 +180,7 @@
         <!-- *************** Scroll Column Header Start Here *************** -->
         <div
           id="table-scroll-column-header"
-          class="flex py-4 px-6 justify-center items-center gap-12 bg-[#C4E9EC] dark:bg-[#241D6B] w-fit min-h-14"
+          class="flex py-4 px-6 justify-center items-center gap-12 bg-[#C4E9EC] dark:bg-[#93AFB1] w-fit min-h-14"
         >
           <ng-container
             *ngFor="
@@ -238,7 +238,7 @@
         <!-- *************** Scroll Column Table Filter Start Here *************** -->
         <div
           id="table-scroll-column-filter-table"
-          class="flex py-4 px-6 justify-center items-center gap-12 bg-[#C4E9EC] dark:bg-[#241D6B] w-fit h-14"
+          class="flex py-4 px-6 justify-center items-center gap-12 bg-[#C4E9EC] dark:bg-[#93AFB1] w-fit h-14"
         >
           <ng-container
             *ngFor="
@@ -354,13 +354,13 @@
     >
       <div
         id="table-action-column-header"
-        class="flex px-6 items-center justify-start gap-12 w-full rounded-tr-[2rem] bg-[#C4E9EC] dark:bg-[#241D6B] py-4"
+        class="flex px-6 items-center justify-start gap-12 w-full rounded-tr-[2rem] bg-[#C4E9EC] dark:bg-[#93AFB1] py-4"
       >
         <span class="w-full text-center">Action</span>
       </div>
       <div
         id="table-action-column-table-filter"
-        class="flex px-6 items-center justify-start gap-12 w-full h-14 bg-[#C4E9EC] dark:bg-[#241D6B]"
+        class="flex px-6 items-center justify-start gap-12 w-full h-14 bg-[#C4E9EC] dark:bg-[#93AFB1]"
       ></div>
       <div
         *ngIf="dataSource?.length; then showActionContent; else noActionContent"
@@ -373,11 +373,11 @@
             [id]="'table-action-column-content-' + i"
             class="h-14 flex px-6 items-center justify-center gap-12 w-full border-b-[1px] border-b-[#28272C25] dark:border-b-[#e5e5e525]"
           >
-            <button class="size-10 leading-none rounded-full bg-[#ECEBC4]" (click)="editRow(column)">
+            <button class="size-10 leading-none rounded-full bg-[#ECEBC4] dark:bg-[#B1B093]" (click)="editRow(column)">
               <span class="material-icons text-2xl">draw</span>
             </button>
             <button
-              class="size-10 leading-none rounded-full bg-[#ECC4C5]"
+              class="size-10 leading-none rounded-full bg-[#ECC4C5] dark:bg-[#B3A1A1]"
               (click)="deleteRow(column?._id)"
             >
               <span class="material-icons text-2xl">delete</span>

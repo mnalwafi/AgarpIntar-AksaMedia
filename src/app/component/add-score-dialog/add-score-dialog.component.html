@@ -84,10 +84,10 @@
         <span class="text-red-500 translate-y-full ml-5 text-sm absolute bottom-0 right-0" *ngIf="scoreForm.get('class')?.hasError('required') && scoreForm.get('class')?.touched">Data ini belum terisi</span>
       </div>
     </div>
-    <div id="form-add-new-data" class="w-full mt-6 flex justify-end gap-4 text-[#28272C] dark:bg-[#241D6B] dark:text-[#f6f6f6]">
-      <button class="px-6 py-2 rounded-2xl bg-[#ECC4C5]" (click)="closeDialog('close')">Batal</button>
-      <button *ngIf="!isEdit" class="px-6 py-2 rounded-2xl bg-[#C4E9EC]" (click)="addScore()">Tambah</button>
-      <button *ngIf="isEdit" class="px-6 py-2 rounded-2xl bg-[#ECEBC4]" (click)="editScore()">Edit</button>
+    <div id="form-add-new-data" class="w-full mt-6 flex justify-end gap-4 text-[#28272C] dark:text-[#f6f6f6]">
+      <button class="px-6 py-2 rounded-2xl bg-[#ECC4C5] dark:bg-[#B3A1A1]" (click)="closeDialog('close')">Batal</button>
+      <button *ngIf="!isEdit" class="px-6 py-2 rounded-2xl bg-[#C4E9EC] dark:bg-[#93AFB1]" (click)="addScore()">Tambah</button>
+      <button *ngIf="isEdit" class="px-6 py-2 rounded-2xl bg-[#ECEBC4] dark:bg-[#B1B093]" (click)="editScore()">Edit</button>
     </div>
   </section>
 </div>
