@@ -40,4 +40,15 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    children: [
+      {
+        path: 'change-profile',
+        loadChildren: () => import('./modules/profile-form/profile-form.routes'),
+      },
+    ],
+  },
 ];
