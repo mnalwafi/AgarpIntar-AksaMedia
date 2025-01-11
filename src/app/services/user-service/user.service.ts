@@ -13,5 +13,7 @@ export class UserService {
 
   removeLocalStorageUser() {
     localStorage?.removeItem('user');
+    localStorage?.removeItem('score-table-pagination');
+    localStorage?.removeItem('score-table-filter');
   }
 }

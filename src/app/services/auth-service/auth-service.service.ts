@@ -42,14 +42,11 @@ export class AuthService {
   /**
    * Sign out
    */
-  signOut(): Observable<any> {
+  signOut() {
     this._userService.removeLocalStorageUser();
 
     // Set the authenticated flag to false
     this._authenticated = false;
-
-    // Return the observable
-    return of(true);
   }
 
   /**
@@ -65,8 +62,6 @@ export class AuthService {
       return of(false);
     }
 
-    // If token is available and not expired, then sign in
-    this.signIn(decodedUserCredential);
     return of(true);
   }
 }

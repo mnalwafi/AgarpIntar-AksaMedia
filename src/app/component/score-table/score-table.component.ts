@@ -143,7 +143,7 @@ export class ScoreTableComponent implements OnInit, OnDestroy {
       operation = of(this._scoreService.removeTableDataByIds(id));
     }
 
-    operation.subscribe(() => {
+    this._subs.sink = operation.subscribe(() => {
       this.fetchScoreData();
       this._cdr.detectChanges();
     });

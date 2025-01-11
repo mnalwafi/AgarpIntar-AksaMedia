@@ -19,7 +19,7 @@ import { ToggleThemeComponent } from '../../component/toggle-theme/toggle-theme.
   imports: [ReactiveFormsModule, NgClass, ToggleThemeComponent],
   templateUrl: './sign-in.component.html',
 })
-export class SignInComponent implements AfterViewInit, OnDestroy {
+export class SignInComponent {
   private _subs = new SubSink();
 
   isDarkMode: boolean = false;
@@ -39,19 +39,11 @@ export class SignInComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  ngAfterViewInit(): void {
-    this._subs.sink = this._themeService.transitionAnimation$?.subscribe({
-      next: (state) => {
-        this.transitionState = state;
-      },
-    });
-  }
-
   // -----------------------------------------------------------------------------------------------------
   // @ Public methods
   // -----------------------------------------------------------------------------------------------------
 
-  signIn(even: Event) {
+  signIn(event: Event) {
     if (event) {
       event.preventDefault();
     }
@@ -71,15 +63,8 @@ export class SignInComponent implements AfterViewInit, OnDestroy {
         textSalahCredential?.classList?.add('translate-y-10');
       }, 1500);
     } else {
-      const eclipse = document?.getElementById('big-eclipse');
-      eclipse?.classList?.add('-translate-y-[32rem]');
-
-      this._themeService?.transitionAnimation?.next(true);
-
-      setTimeout(() => {
-        this._authService?.signIn(this.loginForm?.getRawValue());
-        this._router.navigate(['/home']);
-      }, 1000);
+      this._authService?.signIn(this.loginForm?.getRawValue());
+      this._router.navigate(['/home']);
     }
   }
 
