@@ -1,0 +1,60 @@
+<section
+  id="information-bar"
+  class="flex flex-col sm:flex-row mb-4 w-full h-fit justify-between items-center"
+>
+  <span
+    id="page-title"
+    class="font-syne text-2xl font-bold order-2 sm:order-1 leading-none"
+  >
+    Halaman Penilaian
+  </span>
+
+  <section
+    id="user-detail"
+    class="flex mb-4 sm:mb-0 gap-6 items-center justify-between sm:justify-end h-fit order-1 sm:order-2"
+  >
+    <app-toggle-theme></app-toggle-theme>
+    <div class="flex flex-col group gap-4 mt-4">
+      <div class="flex gap-6 items-center justify-right">
+        <p>Hello, {{ userData.full_name ?? userData.username }}! 👋</p>
+        <figure>
+          <img
+            [src]="userData.photo ?? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE6-KsNGUoKgyIAATW1CNPeVSHhZzS_FN0Zg&s'"
+            alt="profile-picture"
+            class="size-12 rounded-full object-cover"
+          />
+        </figure>
+      </div>
+      <div class="relative w-full max-w-64 font-normal text-[16px] leading-[1.6] text-black top-0 left-full -translate-x-full z-50">
+        <div
+          class="absolute top-full left-0 w-full flex flex-col items-center opacity-0 invisible transform translate-y-[-12px] border border-[#cccccc] rounded-2xl overflow-hidden z-[1] pointer-events-none transition-all duration-[0.48s] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto group-hover:border-[#C4E9EC] bg-[#f6f6f6] dark:bg-[#1f1f1f]"
+        >
+          <div
+          (click)="changeProfile()"
+            class="cursor-pointer w-full transition-all duration-[0.48s] ease-[cubic-bezier(0.23,1,0.32,1)]"
+          >
+            <div
+              class="block w-full text-center py-3 px-6 relative transition-all duration-[0.48s] ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-[#28272C] before:absolute before:inset-0 before:bg-[#ECEBC4] before:scale-x-0 before:transform before:origin-left before:transition-transform before:duration-[0.48s] before:ease-[cubic-bezier(0.23,1,0.32,1)] before:hover:scale-x-100 before:hover:origin-right"
+            >
+            <span class="relative z-20">
+              Ubah data diri
+            </span>
+            </div>
+          </div>
+          <div
+          (click)="signOut()"
+            class="w-full cursor-pointer transition-all duration-[0.48s] ease-[cubic-bezier(0.23,1,0.32,1)]"
+          >
+            <div
+              class="block w-full text-center py-3 px-6 relative transition-all duration-[0.48s] ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-[#28272C] before:absolute before:inset-0 before:bg-[#ECC4C5] before:scale-x-0 before:transform before:origin-left before:transition-transform before:duration-[0.48s] before:ease-[cubic-bezier(0.23,1,0.32,1)] before:hover:scale-x-100 before:hover:origin-right"
+            >
+            <span class="relative z-20 flex items-center justify-center gap-2">
+              <span class="material-icons rotate-180">logout</span> Keluar
+            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
