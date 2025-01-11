@@ -1,0 +1,19 @@
+<section class="w-fit flex gap-4 justify-between">
+  <span class="material-icons cursor-pointer rotate-180" (click)="changePage(1)"
+    >keyboard_tab</span
+  >
+  <span
+    class="material-icons cursor-pointer"
+    (click)="changePage(paginationData.page - 1)"
+    >keyboard_backspace</span
+  >
+  <span>{{ "Halaman " + paginationData.page + " dari " + maxPage }}</span>
+  <span
+    class="material-icons cursor-pointer rotate-180"
+    (click)="changePage(paginationData.page + 1)"
+    >keyboard_backspace</span
+  >
+  <span class="material-icons cursor-pointer" (click)="changePage(maxPage)"
+    >keyboard_tab</span
+  >
+</section>
