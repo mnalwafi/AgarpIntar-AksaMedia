@@ -67,7 +67,7 @@
           refresh
         </button>
         <button
-          (click)="fetchScoreData()"
+          (click)="pagination.page = 1; fetchScoreData()"
           class="material-icons text-[2rem] p-2 items-center justify-center cursor-pointer rounded-3xl leading-none bg-[#28272C] text-[#f6f6f6] dark:bg-[#f6f6f6] dark:text-[#28272C]"
         >
           search

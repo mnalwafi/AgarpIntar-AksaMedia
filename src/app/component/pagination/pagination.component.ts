@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ScoreService } from '../../services/score-service/score.service';
+import { ScoreTableData } from '../../model/score.model';
 
 @Component({
   selector: 'app-pagination',
@@ -12,6 +14,8 @@ export class PaginationComponent implements DoCheck {
   @Output() change: EventEmitter<number> = new EventEmitter();
 
   maxPage: number = 0;
+
+  constructor() {}
 
   ngDoCheck(): void {
     this.maxPage = Math.ceil(this.paginationData.count_document / this.paginationData.amount)

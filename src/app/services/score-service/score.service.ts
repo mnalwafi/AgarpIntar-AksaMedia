@@ -42,11 +42,14 @@ export class ScoreService {
         score?.course?.toLowerCase().startsWith(filter?.course?.toLowerCase() ?? '')
       );
     }
+
     if (filter?.score) {
       filteredData = filteredData.filter(
-        (score) => score?.score?.toLowerCase().startsWith(filter?.score?.toLowerCase() ?? '')
-      );
+        (score) => score?.score?.toLowerCase().startsWith(filter?.score?.toLowerCase() ?? ''));
     }
+
+    filteredData = this.updateCountDocument(filteredData);
+
     return filteredData;
   }
 
