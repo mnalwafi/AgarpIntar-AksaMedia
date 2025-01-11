@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ThemeService } from '../../services/theme-service/theme.service';
 import { SubSink } from 'subsink';
 
@@ -6,6 +6,7 @@ import { SubSink } from 'subsink';
   selector: 'app-toggle-theme',
   standalone: true,
   imports: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './toggle-theme.component.html',
   styles: `
     #toggle:checked + svg #container {
@@ -33,18 +34,22 @@ import { SubSink } from 'subsink';
     }
   `,
 })
-export class ToggleThemeComponent implements AfterViewInit {
+export class ToggleThemeComponent implements OnInit, OnDestroy {
   private _subs = new SubSink();
 
   isDarkMode: boolean = false;
 
-  constructor(private _themeService: ThemeService) {}
+  constructor(private _themeService: ThemeService, private _cdr: ChangeDetectorRef) {}
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this._subs.sink = this._themeService.darkMode$.subscribe((isDark) => {
       this.isDarkMode = isDark;
+      this._cdr?.detectChanges();
     });
+  }
 
+  ngOnDestroy(): void {
+    this._subs.sink?.unsubscribe()
   }
 
   toggleDarkMode() {

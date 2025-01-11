@@ -15,20 +15,6 @@ export const routes: Routes = [
       },
     ],
   },
-   // Auth routes for authenticated users
-  //  {
-  //   path: '',
-  //   canActivate: [AuthGuard],
-  //   canActivateChild: [AuthGuard],
-  //   children: [
-  //     {
-  //       path: 'sign-out',
-  //       loadChildren: () => import('app/modules/auth/sign-out/sign-out.routes'),
-  //     },
-  //   ],
-  // },
-
-  // Auth routes for authenticated users
   {
     path: '',
     canActivate: [AuthGuard],
@@ -37,6 +23,17 @@ export const routes: Routes = [
       {
         path: 'home',
         loadChildren: () => import('./modules/home/home.routes'),
+      },
+    ],
+  },
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    children: [
+      {
+        path: 'change-profile',
+        loadChildren: () => import('./modules/profile-form/profile-form.routes'),
       },
     ],
   },
