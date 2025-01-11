@@ -1,8 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ThemeService } from '../../services/theme-service/theme.service';
 import { SubSink } from 'subsink';
-import { NgClass } from '@angular/common';
-import { ToggleThemeComponent } from '../../component/toggle-theme/toggle-theme.component';
 import { ScoreTableComponent } from "../../component/score-table/score-table.component";
 import { TopBarComponent } from "../../component/top-bar/top-bar.component";
 
