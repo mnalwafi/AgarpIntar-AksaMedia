@@ -153,7 +153,7 @@ export class ScoreTableComponent implements OnInit, OnDestroy {
     this.superFilter?.setValue({
       name: '',
       course: '',
-      score: null,
+      score: '',
     });
 
     this.fetchScoreData();
